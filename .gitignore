@@ -3,6 +3,9 @@
 
 .DS_STORE
 .idea/
+.idea_modules/
+.cache
+.classpath
 # sbt specific
 .cache/
 .history/
