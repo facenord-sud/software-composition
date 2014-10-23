@@ -6,7 +6,10 @@ package ch.unibe.scg.dsl
 class ArrayEntity(_entity:Entity) extends AbstractEntity{
   var entities:List[Entity] = List(_entity)
 
-  def and(entity:Entity):ArrayEntity = {return this}
+  def and(entity:Entity):ArrayEntity = {
+    entities = entities :+ entity
+    return this
+  }
 
   override def can(_entity:Entity) = {
     for(entity <- entities) {
