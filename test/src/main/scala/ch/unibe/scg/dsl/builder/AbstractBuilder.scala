@@ -7,5 +7,5 @@ import ch.unibe.scg.dsl.entity.Entity
  */
 abstract class AbstractBuilder(val entity:Entity) {
 
-  def toString()
+  def toCode()
 }
