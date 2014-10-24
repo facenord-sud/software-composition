@@ -1,4 +1,4 @@
-package ch.unibe.scg.dsl
+package ch.unibe.scg.dsl.entity
 
 /**
  * Created by leo on 22.10.14.
