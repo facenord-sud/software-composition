@@ -1,26 +1,29 @@
 package com.unibe
 
+import ch.unibe.scg.dsl.definition.DSL
 import ch.unibe.scg.dsl.entity.{Entity, Class, Package}
 import ch.unibe.scg.dsl.wrapper.SymbolWrapper
+import DSL._
 
 object Hello {
   def main(args: Array[String]): Unit = {
-    implicit def symbolWrapper(symbol :Symbol) = { new SymbolWrapper(symbol) }
-
     'model is_a Package(name = "org.app.model")
     'controller := Package(name = "org.app.controller")
     'controller and 'model and 'view can access ('test)
     'controller dependsOn 'model
-    println("Hello world")
+//Model: Package with name="org.app.model"
+//Controller: Package with name="org.app.model"
+//Tests: Class with parentClass="junit.framework.TestCase"
+//Controller must depend-on Model
+//Model cannot depend-on View, Controller
+//only Tests can access Model
+//Tests, Model can only depend-on Controller
+  'Model is_a Package(name="org.app.model")
+  'Controller is_a Package(name = "org.app.controller")
+  'Tests is_a Class(parentClass = "junit.framework.TestCase")
+  'Controller must dependOn ('Model)
+  'Model cannot dependOn ('View and 'Controller)
+  only 'Tests can access ('Model)
+  'Tests and 'Model can only dependOn 'Controller
   }
-
-  def Package(name:String = ""):Entity = {
-    new Package(name)
-  }
-
-  def access(symbol:Symbol):String = {return ""}
-
-  def is_a() = {}
-
-
 }
