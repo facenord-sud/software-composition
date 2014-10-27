@@ -19,7 +19,7 @@ class SymbolWrapper(symbol:Symbol) extends AbstractRule{
     is_a(entity)
   }
   def and(symbol:Symbol):ArrayEntity = {
-    return new ArrayEntity(new Package(""))
+    return new ArrayEntity(symbol, Assignments.get(symbol))
   }
 
   def text():String = {

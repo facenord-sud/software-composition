@@ -8,10 +8,6 @@ import ch.unibe.scg.dsl.rules.Rule
 
 class Entity(val name:String) extends AbstractEntity{
 
-  def and(entity:Entity):ArrayEntity = {
-    return new ArrayEntity(entity)
-  }
-
     override def text():String = ???
 
   def parameters(parameters:Map[Symbol, String]): String = {

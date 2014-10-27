@@ -1,13 +1,17 @@
 package ch.unibe.scg.dsl.test
 
 //import ch.unibe.scg.dsl.builder.Assignments
+
+import ch.unibe.scg.dsl.builder.RulesDefinition
 import ch.unibe.scg.dsl.definition.DSL._
 import ch.unibe.scg.dsl.entities.{ArrayEntity, Entity}
 import org.scalatest._
 import org.scalatest.matchers.ShouldMatchers
 
-class ArrayEntitySpec extends FlatSpec with ShouldMatchers {
-  val arrayEntity = new ArrayEntity(new DummyEntity())
+class ArrayEntitySpec extends FlatSpec with Matchers {
+  val dummy0 = Package(name = "foo.bar")
+  'dummy0 is_a dummy0
+  val arrayEntity = new ArrayEntity('dummy0, dummy0)
   val dummyPackage = new DummyEntity()
 
   //
@@ -18,31 +22,17 @@ class ArrayEntitySpec extends FlatSpec with ShouldMatchers {
 
   "An ArrayEntity.and(entity)" should "add the entity to the ArrayEntity" in {
     'dummy is_a dummyPackage
-    val entities =  arrayEntity.and('dummy).entities(1) should equal(dummyPackage)
+    val entities =  arrayEntity.and('dummy).entities('dummy) should equal(dummyPackage)
   }
 
-  "Call of method from AbstractEntity" should "change the instance vars of ch.unibe.scg.dsl.test.DummyEntity" in {
-    arrayEntity.can("foo")
-    arrayEntity.dependsOn("bar")
-    for(entity <- arrayEntity.entities) {
-      val boolCan = entity.asInstanceOf[ch.unibe.scg.dsl.test.DummyEntity].isCan
-      boolCan should equal (true)
-      val boolDependsOn = entity.asInstanceOf[ch.unibe.scg.dsl.test.DummyEntity].isDependsOn
-      boolDependsOn should equal (true)
-    }
+  "Call one of the rule for ArrayEntity" should "add rules to the singleton" in {
+    arrayEntity.can(dependOn('dummy))
+    RulesDefinition.rules.size should equal (2)
   }
 }
 
-class DummyEntity extends Entity("") {
-  var isDependsOn:Boolean = false
-  var isCan:Boolean = false
-  override def can(text:String):Unit = {
-    isCan = true
-  }
+class DummyEntity extends Entity("foo.bar") {
 
-  override def dependsOn(text:String):Unit = {
-    isDependsOn = true
-  }
 
   override def text():String = {
     generateCode(Map())

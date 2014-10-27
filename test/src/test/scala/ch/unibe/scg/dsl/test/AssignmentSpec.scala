@@ -18,7 +18,7 @@ class AssignmentSpec extends FlatSpec with Matchers with BeforeAndAfterEach {
 
   "Assigning a Class" should "produces the correct code" in {
     val name = "FooBar"
-    testAssignment("Class", Class(name), name)
+    testAssignment("Class", Klass(name), name)
   }
 
   "Assigning a Method" should "produces the correct code" in {
@@ -30,7 +30,7 @@ class AssignmentSpec extends FlatSpec with Matchers with BeforeAndAfterEach {
     val symbol = 'var
     val name = "foo.bar"
     val parentClass = "bar.foo"
-    symbol is_a Class(name = name, parentClass = parentClass)
+    symbol is_a Klass(name = name, parentClass = parentClass)
     Assignments.text() should equal (s"${symbol.text}:Class with name=" + '"' + name + "\", parentClass=" + '"' + parentClass + '"')
   }
 
