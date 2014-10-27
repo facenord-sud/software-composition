@@ -1,1 +1,5 @@
-package ch.unibe.scg.dsl.
+package ch.unibe.scg.dsl.builder
+
+class Rule {
+
+}

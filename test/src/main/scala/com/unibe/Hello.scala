@@ -7,10 +7,6 @@ import DSL._
 
 object Hello {
   def main(args: Array[String]): Unit = {
-    'model is_a Package(name = "org.app.model")
-    'controller := Package(name = "org.app.controller")
-    'controller and 'model and 'view can access ('test)
-    'controller dependsOn 'model
 //Model: Package with name="org.app.model"
 //Controller: Package with name="org.app.model"
 //Tests: Class with parentClass="junit.framework.TestCase"
