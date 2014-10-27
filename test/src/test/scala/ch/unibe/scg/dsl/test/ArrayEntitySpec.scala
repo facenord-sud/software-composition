@@ -2,7 +2,7 @@ package ch.unibe.scg.dsl.test
 
 //import ch.unibe.scg.dsl.builder.Assignments
 import ch.unibe.scg.dsl.definition.DSL._
-import ch.unibe.scg.dsl.entity.{ArrayEntity, Entity}
+import ch.unibe.scg.dsl.entities.{ArrayEntity, Entity}
 import org.scalatest._
 import org.scalatest.matchers.ShouldMatchers
 

@@ -2,7 +2,7 @@ package ch.unibe.scg.dsl.test
 
 import ch.unibe.scg.dsl.builder.Assignments
 import ch.unibe.scg.dsl.definition.DSL._
-import ch.unibe.scg.dsl.entity.Entity
+import ch.unibe.scg.dsl.entities.Entity
 import org.scalatest._
 
 class AssignmentSpec extends FlatSpec with Matchers with BeforeAndAfterEach {

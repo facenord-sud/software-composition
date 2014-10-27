@@ -1,6 +1,6 @@
-package ch.unibe.scg.dsl.entity
+package ch.unibe.scg.dsl.entities
 
-import ch.unibe.scg.dsl.builder.Rule
+import ch.unibe.scg.dsl.rules.Rule
 
 /**
 * Created by leo on 22.10.14.
@@ -12,10 +12,7 @@ class Entity(val name:String) extends AbstractEntity{
     return new ArrayEntity(entity)
   }
 
-  override def can(rules:Rule*):Unit = ???
-  override def text():String = ???
-  override def cannot(rules: Rule*): Unit = ???
-  override def must(rules: Rule*): Unit = ???
+    override def text():String = ???
 
   def parameters(parameters:Map[Symbol, String]): String = {
     var result:List[String] = List[String]()

@@ -1,6 +1,5 @@
-package ch.unibe.scg.dsl.entity
+package ch.unibe.scg.dsl.entities
 
-import scala.reflect.runtime.{universe => ru}
 /**
  * Created by leo on 22.10.14.
  */

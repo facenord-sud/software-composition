@@ -1,6 +1,6 @@
 package ch.unibe.scg.dsl.builder
 
-import ch.unibe.scg.dsl.entity._
+import ch.unibe.scg.dsl.entities._
 import ch.unibe.scg.dsl.definition.DSL._
 
 object Assignments {
