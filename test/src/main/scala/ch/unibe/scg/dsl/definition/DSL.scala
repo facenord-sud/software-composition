@@ -1,6 +1,6 @@
 package ch.unibe.scg.dsl.definition
 
-import ch.unibe.scg.dsl.entity.{Method, Class, Package}
+import ch.unibe.scg.dsl.entity.{ArrayEntity, Method, Class, Package}
 import ch.unibe.scg.dsl.wrapper.SymbolWrapper
 
 object DSL {
@@ -18,5 +18,11 @@ object DSL {
     new Method(name)
   }
 
-  def access(symbol:Symbol):String = {return ""}
+  def access(symbol:Symbol):Symbol = {return null}
+
+  def dependOn(symbol:Symbol):Symbol = {return null}
+  def dependOn(symbol:ArrayEntity):Symbol = {return null}
+
+  def only(t:Symbol):Symbol = {return null}
+  def only() = {}
 }

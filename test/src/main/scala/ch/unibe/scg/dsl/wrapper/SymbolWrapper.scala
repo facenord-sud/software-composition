@@ -23,5 +23,9 @@ class SymbolWrapper(symbol:Symbol) {
     symbol.name
   }
 
+  def must(t:Unit) = {}
+  def cannot(t:Unit) = {}
+  def can(t:Symbol) = {}
+
   def dependsOn(symbol:Symbol) = {}
 }

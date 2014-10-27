@@ -23,7 +23,7 @@ object Hello {
   'Tests is_a Class(parentClass = "junit.framework.TestCase")
   'Controller must dependOn ('Model)
   'Model cannot dependOn ('View and 'Controller)
-  only 'Tests can access ('Model)
-  'Tests and 'Model can only dependOn 'Controller
+  only 'Tests  can access ('Model)
+  'Tests and 'Model can (only, access('Model))
   }
 }
