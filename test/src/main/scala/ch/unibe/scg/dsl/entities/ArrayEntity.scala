@@ -19,10 +19,10 @@ class ArrayEntity(_symbol:Symbol, _entity:Entity) extends AbstractEntity with Ab
   override def text(): String = ???
 
   override def can(statement: Statement): Rule = {
-//    for((identifier, entity) <- entities) {
-//      RulesDefinition.rules ++ new Can()
-//    }
-    return null
+    for((identifier, entity) <- entities) {
+      RulesDefinition.rules = RulesDefinition.rules :+ new Can(identifier, statement)
+    }
+    return RulesDefinition.rules.last
   }
 
   override def can(modifier: Modifier, statement: Statement): Rule = ???

@@ -27,7 +27,7 @@ class SymbolWrapper(symbol:Symbol) extends AbstractRule{
   }
 
   override def can(statement: Statement): Rule = {
-    new Can(Assignments.get(symbol), statement)
+    new Can(symbol, statement)
   }
 
   override def can(modifier: Modifier, statement: Statement): Rule = {
