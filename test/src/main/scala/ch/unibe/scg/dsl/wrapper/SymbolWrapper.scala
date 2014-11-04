@@ -1,10 +1,10 @@
 package ch.unibe.scg.dsl.wrapper
 
-import ch.unibe.scg.dsl.builder.Assignments
+import ch.unibe.scg.dsl.builder.{RulesDefinition, Assignments}
 import ch.unibe.scg.dsl.entities.{ArrayEntity, Entity, Package}
-import ch.unibe.scg.dsl.modifiers.Modifier
-import ch.unibe.scg.dsl.rules.{Can, Rule, AbstractRule}
-import ch.unibe.scg.dsl.statements.Statement
+import ch.unibe.scg.dsl.modifiers.{Modifier, Only, Not}
+import ch.unibe.scg.dsl.rules.{Can, Rule, AbstractRule, Must, Cannot}
+import ch.unibe.scg.dsl.statements.{Statement}
 
 /**
  * Created by leo on 24.10.14.
@@ -12,35 +12,39 @@ import ch.unibe.scg.dsl.statements.Statement
 class SymbolWrapper(symbol:Symbol) extends AbstractRule{
 
   def is_a(entity:Entity) = {
+    entity.symbol = symbol
     Assignments.add(symbol, entity)
   }
 
-  def ::(entity:Entity) = {
+  def :=(entity:Entity) = {
     is_a(entity)
   }
-  def and(symbol:Symbol):ArrayEntity = {
-    return new ArrayEntity(symbol, Assignments.get(symbol))
+  def and(_symbol:Symbol):ArrayEntity = {
+    return new ArrayEntity(getEntity).and(_symbol)
   }
-
   def text():String = {
     symbol.name
   }
 
   override def can(statement: Statement): Rule = {
-    new Can(symbol, statement)
+    generateRules(new Can(getEntity, statement))
   }
 
-  override def can(modifier: Modifier, statement: Statement): Rule = {
-    val _can = can(statement)
-    _can.modifier = modifier
-    _can
+  override def canOnly(statement: Statement): Rule = {
+    val _can = new Can(getEntity, statement)
+    _can.modifier = new Only()
+    generateRules(_can)
   }
 
-  override def must(statement: Statement): Rule = ???
+  override def must(statement: Statement): Rule = {
+    generateRules(new Must(getEntity, statement))
+  }
 
-  override def must(modifier: Modifier, statement: Statement): Rule = ???
+  override def cannot(statement: Statement): Rule = {
+    generateRules(new Cannot(getEntity, statement))
+  }
 
-  override def cannot(statement: Statement): Rule = ???
-
-  override def cannot(modifier: Modifier, statement: Statement): Rule = ???
+  private def getEntity(): Entity = {
+    Assignments.get(symbol)
+  }
 }

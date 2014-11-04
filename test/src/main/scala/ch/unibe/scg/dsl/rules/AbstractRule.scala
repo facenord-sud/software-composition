@@ -1,5 +1,6 @@
 package ch.unibe.scg.dsl.rules
 
+import ch.unibe.scg.dsl.builder.RulesDefinition
 import ch.unibe.scg.dsl.modifiers.Modifier
 import ch.unibe.scg.dsl.statements.Statement
 
@@ -8,9 +9,12 @@ import ch.unibe.scg.dsl.statements.Statement
  */
 trait AbstractRule {
   def can(statement: Statement):Rule
-  def can(modifier: Modifier, statement: Statement):Rule
+  def canOnly(statement: Statement): Rule
   def cannot(statement: Statement):Rule
-  def cannot(modifier: Modifier, statement: Statement):Rule
   def must(statement: Statement):Rule
-  def must(modifier: Modifier, statement: Statement):Rule
+
+  protected def generateRules(rule: Rule):Rule = {
+    RulesDefinition.add(rule)
+    return rule
+  }
 }

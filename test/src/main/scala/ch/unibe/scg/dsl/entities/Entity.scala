@@ -8,7 +8,10 @@ import ch.unibe.scg.dsl.rules.Rule
 
 class Entity(val name:String) extends AbstractEntity{
 
+  var symbol: Symbol = null
+
     override def text():String = ???
+    override def nameInstance(): String = symbol.name
 
   def parameters(parameters:Map[Symbol, String]): String = {
     var result:List[String] = List[String]()

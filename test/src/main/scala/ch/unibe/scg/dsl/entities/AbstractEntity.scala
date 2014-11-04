@@ -5,4 +5,5 @@ package ch.unibe.scg.dsl.entities
  */
 abstract class AbstractEntity {
   def text():String
+  def nameInstance(): String
 }

@@ -1,37 +1,42 @@
 package ch.unibe.scg.dsl.entities
 import ch.unibe.scg.dsl.builder.{RulesDefinition, Assignments}
-import ch.unibe.scg.dsl.modifiers.Modifier
-import ch.unibe.scg.dsl.rules.{Can, Rule, AbstractRule}
+import ch.unibe.scg.dsl.modifiers.{Only, Modifier}
+import ch.unibe.scg.dsl.rules._
 import ch.unibe.scg.dsl.statements.Statement
 
 /**
  * Created by leo on 22.10.14.
  */
-class ArrayEntity(_symbol:Symbol, _entity:Entity) extends AbstractEntity with AbstractRule{
-  var entities:Map[Symbol, Entity] = Map[Symbol, Entity](_symbol -> _entity)
+class ArrayEntity(_entity:Entity) extends AbstractEntity with AbstractRule{
+  var entities: List[Entity] = List[Entity](_entity)
 
   def and(symbol:Symbol):ArrayEntity = {
     val entity = Assignments.get(symbol)
-    entities = entities + (symbol -> entity)
+    entities = entities :+ entity
     return this
   }
 
+  override def nameInstance(): String = {
+    entities.map { _.nameInstance() }.mkString(", ")
+  }
   override def text(): String = ???
 
   override def can(statement: Statement): Rule = {
-    for((identifier, entity) <- entities) {
-      RulesDefinition.rules = RulesDefinition.rules :+ new Can(identifier, statement)
-    }
-    return RulesDefinition.rules.last
+    generateRules(new Can(this, statement))
   }
 
-  override def can(modifier: Modifier, statement: Statement): Rule = ???
+  override def canOnly(statement: Statement): Rule = {
+    val _can = new Can(this, statement)
+    _can.modifier = new Only()
+    generateRules(_can)
+  }
 
-  override def must(statement: Statement): Rule = ???
+  override def must(statement: Statement): Rule = {
+    generateRules(new Must(this, statement))
+  }
 
-  override def must(modifier: Modifier, statement: Statement): Rule = ???
 
-  override def cannot(statement: Statement): Rule = ???
-
-  override def cannot(modifier: Modifier, statement: Statement): Rule = ???
+  override def cannot(statement: Statement): Rule = {
+    generateRules(new Cannot(this, statement))
+  }
 }
