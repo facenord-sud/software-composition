@@ -1,5 +1,5 @@
 # Scala DSL for DICTŌ
-| A DSL for interacting with (http://scg.unibe.ch/dicto/index.php)[DICTŌ]
+> A DSL for interacting with [DICTŌ](http://scg.unibe.ch/dicto/index.php)
 
 ## Goal
 The goal of this project is to build a Scala DSL which interact with DICTŌ. A Scala DSL provide the advantage to can be used in every Scala and Java projects. So using DICTŌ will become really easy.
