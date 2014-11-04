@@ -1,7 +1,5 @@
 package ch.unibe.scg.dicto.examples
 
-import ch.unibe.scg.dicto.builder._
-import ch.unibe.scg.dicto.definition.DSL
 import ch.unibe.scg.dicto.definition.DSL._
 
 object HelloWorld {
