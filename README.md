@@ -11,6 +11,13 @@ All the files for the Scala library are under `src/main/scala`. The tests are no
 
 In the package `examples` you can have a look at a simple code which generate and print the DICTŌ code to the console.
 
+## Usage
+
+1. If not already done, install [sbt](http://www.scala-sbt.org) (`brew install sbt` on OS X)
+2. Clone this repo
+3. From the root of this repo, run sbt: `sbt`
+4. To run the example: `run`
+
 ## TODO
 
 TODO!!!
