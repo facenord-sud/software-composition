@@ -17,6 +17,9 @@ In the package `examples` you can have a look at a simple code which generate an
 2. Clone this repo
 3. From the root of this repo, run sbt: `sbt`
 4. To run the example: `run`
+ 
+## Future work
+The next steps will to generate the DSL from the DICTO specifications and to interact with the Small-talk engine. After that it is neede to provide a way to easely integrate in a Java or Scala project. The best way would probably to create a Maven dependecie
 
 ## TODO
 
