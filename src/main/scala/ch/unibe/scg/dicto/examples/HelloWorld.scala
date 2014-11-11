@@ -2,8 +2,8 @@ package ch.unibe.scg.dicto.examples
 
 import ch.unibe.scg.dicto.definition.DSL._
 
-object HelloWorld {
-  def main(args: Array[String]): Unit = {
+class HelloWorld {
+
     val result = dicto {
       'View := Package(name = "org.app.view")
       'Model := Package(name = "org.app.model")
@@ -16,5 +16,4 @@ object HelloWorld {
       'Controller must dependOn('View)
     }
     println(result)
-  }
 }
