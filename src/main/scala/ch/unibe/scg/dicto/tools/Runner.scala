@@ -26,17 +26,13 @@ object Runner {
       System.exit(0)
     }
 
-    val scalac = s"scalac -cp ${getJARPath()} $compile"
+    val scalac = s"scalac -cp ${getJARPath()} -d ${tmpDir.toUri.getPath} $compile"
     println(scalac.!!)
 
-    var urls = Array[URL]()
-    getFileTree(tmpDir.toFile).filter(_.getName.endsWith(".class")).foreach{file =>
-      urls :+= file.toURI.toURL
-    }
+    var urls = Array[URL](tmpDir.toUri.toURL)
 
     val classLoader: ClassLoader = new URLClassLoader(urls)
-    classLoader.loadClass("java.lang.String")
-    Class.forName("test.dicto.TestDicto")
+    classLoader.loadClass("test.dicto.TestDicto").newInstance()
 
   }
 
