@@ -1,0 +1,15 @@
+<results>
+  <rules>
+    <rule id="1" failed="false" value="WithDeadlock cannot lead to deadlock">
+			<subrule id="1001" failed="true" value="WithDeadlock cannot leadToDeadlock()" testedBy="DIJPFDeadlock">
+				<error>Cause of failure: Pas_bien</error>
+        </subrule>
+      </rule>
+		<rule id="2" failed="true" value="WithoutDeadlock cannot lead to deadlock">
+			<subrule id="2001" failed="true" value="WithoutDeadlock cannot leadToDeadlock()" testedBy="DIJPFDeadlock">
+				<error>JavaPathfinder v6.0 (rev 1038) - (C) RIACS/NASA Ames Research Center ====================================================== system under test application: org/jhotdraw/samples/javadraw/JavaDrawApp.java ====================================================== search started: 11/5/14 10:29 AM [WARNING] orphan NativePeer method: java.util.ResourceBundle.getClassContext()[Ljava/lang/Class; ====================================================== error #1 gov.nasa.jpf.jvm.NoUncaughtExceptionsProperty java.lang.UnsatisfiedLinkError: cannot find native sun.reflect.Reflection.getCallerClass at sun.reflect.Reflection.getCallerClass(gov.nasa.jpf.jvm.JPF_sun_reflect_Reflection) at java.util.ResourceBundle.getBundle(ResourceBundle.java:764) at java.awt.Toolkit$3.run(Toolkit.java:1657) at java.security.AccessController.doPrivileged(AccessController.java:35) at java.awt.Toolkit.-clinit-(Toolkit.java:1653) at java.awt.Component.-clinit-(Component.java:595) ====================================================== thread ops #1 trans insn loc : stmt --------------------------------------------------- ====================================================== results error #1: gov.nasa.jpf.jvm.NoUncaughtExceptionsProperty "java.lang.UnsatisfiedLinkError: cannot find native..." ====================================================== statistics elapsed time: 00:00:00 states: new=8, visited=0, backtracked=0, end=0 search: maxDepth=8, constraints hit=0 choice generators: thread=8 (signal=0, lock=1, shared ref=0), data=0 heap: new=1715, released=103, max live=1602, gc-cycles=7 instructions: 48281 max memory: 245MB loaded code: classes=184, methods=3473 ====================================================== search finished: 11/5/14 10:29 AM
+        </error>
+      </subrule>
+    </rule>
+  </rules>
+</results>

@@ -7,6 +7,9 @@ import ch.unibe.scg.dicto.rules.Rule
 import ch.unibe.scg.dicto.statements.{DependOn, Access, Statement}
 import ch.unibe.scg.dicto.wrapper.SymbolWrapper
 
+import scala.xml._
+import org.junit.Assert._
+
 object DSL {
   implicit def symbolWrapper(symbol :Symbol) = { new SymbolWrapper(symbol) }
 
@@ -37,7 +40,25 @@ object DSL {
     rule.modifier = new Only(isFirst=true)
   }
 
-  def dicto(code: => Unit):String = {
+  def assertDicto(code: => Unit):String = {
+    val file: String = this.getClass.getResource("/results.xml").getPath
+    val xml:Elem = XML.loadFile(file)
+    (xml \ "rules" \ "rule").foreach { rule =>
+    if((rule \ "@failed").text == "true") {
+        (rule \ "subrule").foreach { subrule =>
+        if((subrule \ "@failed").text == "true") {
+            var subRuleId = (subrule \ "@id").text
+            var subRuleValue = (subrule \ "@value").text
+            var errorMessage = s"Subrule $subRuleValue (id: $subRuleId) has failed:" + "\n" + (subrule \ "error").text
+          assertTrue(errorMessage, false)
+          }
+        }
+      }
+    }
+    return "aéksf"
+  }
+
+  private def dicto(code: => Unit): String =  {
     Assignments.clear()
     RulesDefinition.clear()
     code

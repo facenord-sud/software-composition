@@ -20,7 +20,11 @@ object Runner {
       System.exit(0)
     }
     val classes = getFileTree(dir).filter(_.getName.endsWith(searchCriteria))
-    val compile = classes.map(_.getAbsolutePath).mkString(" ")
+    var className = Array[String]()
+    val compile = classes.map{ file =>
+      className :+= firstLine(file).get.split(" ")(1) + "." + file.getName.replaceFirst("[.][^.]+$", "")
+      file.getAbsolutePath
+    }.mkString(" ")
     if(compile.length == 0) {
       println("empty test suite.")
       System.exit(0)
@@ -32,7 +36,9 @@ object Runner {
     var urls = Array[URL](tmpDir.toUri.toURL)
 
     val classLoader: ClassLoader = new URLClassLoader(urls)
-    classLoader.loadClass("test.dicto.TestDicto").newInstance()
+    className.foreach(klas =>
+      classLoader.loadClass(klas).newInstance())
+
 
   }
 
@@ -42,5 +48,14 @@ object Runner {
 
   def getJARPath() :String = {
     new File(this.getClass.getProtectionDomain().getCodeSource().getLocation().toURI.getPath()).getAbsolutePath
+  }
+
+  def firstLine(f: java.io.File): Option[String] = {
+    val src = io.Source.fromFile(f)
+    try {
+      src.getLines.find(_ => true)
+    } finally {
+      src.close()
+    }
   }
 }

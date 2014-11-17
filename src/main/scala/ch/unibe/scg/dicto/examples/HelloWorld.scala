@@ -4,7 +4,7 @@ import ch.unibe.scg.dicto.definition.DSL._
 
 class HelloWorld {
 
-    val result = dicto {
+    val result = assertDicto {
       'View := Package(name = "org.app.view")
       'Model := Package(name = "org.app.model")
       'Controller := Package(name = "org.app.controller")
