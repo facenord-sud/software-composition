@@ -5,7 +5,12 @@ import java.net.{URLClassLoader, URL}
 import java.nio.file._
 import scala.sys.process._
 /**
- * Created by leo on 10.11.14.
+ * Compile and execute all scala files ending with a certain pattern.
+ * The default pattern is <code>*Dicto.scala</code>.<br/>
+ * As first parameter, you can pass the folder to look for scala files, by default it is dicto<br/>
+ * As second parameter, you can pass the pattern used to select scala files, by default is is Dicto.scala
+ * <br/>
+ * Not accurate anymore, because it is integrated with JUnit
  */
 
 object Runner {

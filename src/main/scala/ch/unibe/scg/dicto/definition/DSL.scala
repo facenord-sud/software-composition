@@ -58,7 +58,7 @@ object DSL {
     return "aéksf"
   }
 
-  private def dicto(code: => Unit): String =  {
+  def dicto(code: => Unit): String =  {
     Assignments.clear()
     RulesDefinition.clear()
     code

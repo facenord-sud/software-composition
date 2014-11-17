@@ -2,26 +2,31 @@
 > A DSL for interacting with [DICTŌ](http://scg.unibe.ch/dicto/index.php)
 
 ## Goal
-The goal of this project is to build a Scala DSL which interact with DICTŌ. A Scala DSL provide the advantage to can be used in every Scala and Java projects. So using DICTŌ will become really easy.
+The goal of this project is to build a Scala DSL which interact with DICTŌ and integrated with JUnit. A Scala DSL provide the advantage to can be used in every Scala and Java projects. So using DICTŌ will become really easy.
 
-An other advantage is to provide smart autocompletion in almost every plateform
+An other advantage is to provide smart autocompletion in almost every IDE or text editors
 
 ## Organization
-All the files for the Scala library are under `src/main/scala`. The tests are not accuarte any more and will be updated soon.
+All the files for the Scala library are under `src/main/scala`.
 
-In the package `examples` you can have a look at a simple code which generate and print the DICTŌ code to the console.
+Files in packages `examples` and `tools` are not accurate anymore, but
+can be run with: `sbt run`. See Usage for more infos. And refer to
+comments in the files to know what they are doing.
+
+The test in the folder `src/test/scala/ExampleTest.scala` is for
+demonstration only. It shows how the results from DICTŌ are used and
+integrated with JUnit 4. For now, it do not really interact with DICTŌ,
+but it use an example file located in: `src/main/resources`.
 
 ## Usage
 
 1. If not already done, install [sbt](http://www.scala-sbt.org) (`brew install sbt` on OS X)
 2. Clone this repo
 3. From the root of this repo, run sbt: `sbt`
-4. To run the example: `run`
+4. To run the example test: `test`
  
 ## Future work
-The next steps will to generate the DSL from the DICTO specifications and to interact with the Small-talk engine. After that it is neede to provide a way to easely integrate in a Java or Scala project. The best way would probably to create a Maven dependecie
+The next steps will to generate the DSL from the DICTO specifications and to interact with the Small-talk engine.
 
-## TODO
-
-TODO!!!
-
+An other point is to think about a way to distribute it. Actually a JAR
+is available.

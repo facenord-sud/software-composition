@@ -3,12 +3,12 @@ package ch.unibe.scg.dicto.examples
 import ch.unibe.scg.dicto.definition.DSL._
 
 /**
-* The most simple example to show that the our DSL generate DICTO code
+* An example class to show what the runner in tools/Runner.scala is doing.<br/>
+* Actually, simply printing the generated DICTO code to the console
 */
-class HelloWorld {
+class ExampleDicto {
 
-  def main(args: Array[String]) = {
-    val result = dicto {
+   dicto {
       'View := Package(name = "org.app.view")
       'Model := Package(name = "org.app.model")
       'Controller := Package(name = "org.app.controller")
@@ -19,6 +19,5 @@ class HelloWorld {
       'Tests and 'Model canOnly access('Model)
       'Controller must dependOn('View)
     }
-    println(result)
-  }
+
 }
