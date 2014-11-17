@@ -40,22 +40,20 @@ object DSL {
     rule.modifier = new Only(isFirst=true)
   }
 
-  def assertDicto(code: => Unit):String = {
+  def assertDicto(code: => Unit):Unit = {
     val file: String = this.getClass.getResource("/results.xml").getPath
     val xml:Elem = XML.loadFile(file)
     (xml \ "rules" \ "rule").foreach { rule =>
     if((rule \ "@failed").text == "true") {
-        (rule \ "subrule").foreach { subrule =>
-        if((subrule \ "@failed").text == "true") {
-            var subRuleId = (subrule \ "@id").text
-            var subRuleValue = (subrule \ "@value").text
-            var errorMessage = s"Subrule $subRuleValue (id: $subRuleId) has failed:" + "\n" + (subrule \ "error").text
+        (rule \ "subrule").foreach { subruleElem =>
+          var subRule = new Subrule(subruleElem)
+        if(subRule.isFailed) {
+            var errorMessage = s"Subrule ${subRule.value} (id: ${subRule.id}) has failed:" + "\n" + subRule.error
           assertTrue(errorMessage, false)
           }
         }
       }
     }
-    return "aéksf"
   }
 
   def dicto(code: => Unit): String =  {
