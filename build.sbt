@@ -19,14 +19,15 @@ libraryDependencies ++= Seq(
 )
 
 // Change this to another test framework if you prefer
-
-libraryDependencies += "com.novocode" % "junit-interface" % "0.8"
+libraryDependencies += "com.novocode" % "junit-interface" % "0.11"
 
 libraryDependencies += "org.scala-lang" % "scala-reflect" % "2.11.3"
 
 libraryDependencies += "org.scala-lang" % "scala-compiler" % "2.9.2"
 
 libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.0.2"
+
+libraryDependencies += "com.mashape.unirest" % "unirest-java" % "1.3.20"
 
 // Uncomment to use Akka
 //libraryDependencies += "com.typesafe.akka" % "akka-actor_2.11" % "2.3.3"

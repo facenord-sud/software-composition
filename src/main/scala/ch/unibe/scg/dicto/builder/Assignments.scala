@@ -2,6 +2,8 @@ package ch.unibe.scg.dicto.builder
 
 import ch.unibe.scg.dicto.entities._
 import ch.unibe.scg.dicto.definition.DSL._
+import scala.collection.mutable
+import scala.collection.mutable.Map
 
 object Assignments {
   var variables = Map[Symbol, Entity]()

@@ -1,6 +1,6 @@
 package ch.unibe.scg.dicto.definition
 
-import ch.unibe.scg.dicto.builder.{RulesDefinition, Assignments}
+import ch.unibe.scg.dicto.builder.{Rules, RulesDefinition, Assignments}
 import ch.unibe.scg.dicto.entities.{ArrayEntity, Method, Class, Package, Entity}
 import ch.unibe.scg.dicto.modifiers.{Only, Modifier}
 import ch.unibe.scg.dicto.rules.Rule
@@ -46,20 +46,19 @@ object DSL {
     (xml \ "rules" \ "rule").foreach { rule =>
     if((rule \ "@failed").text == "true") {
         (rule \ "subrule").foreach { subruleElem =>
-          var subRule = new Subrule(subruleElem)
-        if(subRule.isFailed) {
-            var errorMessage = s"Subrule ${subRule.value} (id: ${subRule.id}) has failed:" + "\n" + subRule.error
-          assertTrue(errorMessage, false)
-          }
-        }
+        var subRule = new Subrule(subruleElem)
+        var errorMessage = s"Subrule ${subRule.value} (id: ${subRule.id}) has failed:"  + subRule.error
+        assertTrue(errorMessage, !subRule.isFailed)
       }
     }
   }
+}
 
-  def dicto(code: => Unit): String =  {
-    Assignments.clear()
-    RulesDefinition.clear()
-    code
-    Assignments.text() + "\n\n" + RulesDefinition.text()
-  }
+def dicto(code: => Unit): String =  {
+  Assignments.clear()
+  RulesDefinition.clear()
+  code
+  Rules.save
+  Rules.code
+}
 }

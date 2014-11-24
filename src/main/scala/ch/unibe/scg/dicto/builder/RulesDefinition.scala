@@ -1,6 +1,7 @@
 package ch.unibe.scg.dicto.builder
 
 import ch.unibe.scg.dicto.rules.Rule
+import scala.collection.mutable.Map
 
 /**
 * Created by leo on 27.10.14.
