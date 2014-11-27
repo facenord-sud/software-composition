@@ -38,7 +38,7 @@ def aTest = {
 ## Installation
 
 You have two possibilities:
-- Downlaod the latest [release]() and include it in your path of your Java or Scala project
+- Downlaod the latest [release](https://github.com/facenord-sud/software-composition/releases) and include it in your path of your Java or Scala project
 - clone the repo:
   1. Run `sbt package`
   2. Run `sbt publish-locally`
@@ -46,7 +46,7 @@ You have two possibilities:
   
  ## Usage
 
-Once installed, start creating a test file like every other JUnit test. You can inspire of this [one]() to get started.
+Once installed, start creating a test file like every other JUnit test. You can inspire of this [one](https://github.com/facenord-sud/software-composition/blob/master/src/test/scala/DictoTester.scala) to get started.
 
 After that, start coding dicto tests based on the DSL an run it like every JUnit tests! 
  
