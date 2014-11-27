@@ -27,7 +27,7 @@ integrated with JUnit 4.
 3. From the root of this repo, run sbt: `sbt`
 4. To run the example test: `test`
 5. If you want to add more dicto tests:
-6. edit the file src/test/scala/DictoTester.scala
+6. edit the file `src/test/scala/DictoTester.scala`
 7. A dicto tests is something like that:
 ```scala
 @DictoTest
