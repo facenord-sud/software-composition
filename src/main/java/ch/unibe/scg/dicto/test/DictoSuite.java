@@ -11,7 +11,11 @@ import org.junit.runners.model.RunnerBuilder;
 import java.lang.annotation.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import ch.unibe.scg.dicto.util.MD5;
 
 import static org.junit.Assert.assertTrue;
 
@@ -62,10 +66,24 @@ public class DictoSuite extends ParentRunner<Runner> {
         public String value();
     }
 
+    /**
+     * The <code>SuiteClasses</code> annotation specifies the classes to be run when a class
+     * annotated with <code>@RunWith(Suite.class)</code> is run.
+     */
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.TYPE)
+    @Inherited
+    public @interface ServerAddress {
+        /**
+         * @return the classes to be run
+         */
+        public String value();
+    }
+
     private static Class<?>[] getAnnotatedClasses(Class<?> klass) throws InitializationError {
         SuiteClasses annotation = klass.getAnnotation(SuiteClasses.class);
         if (annotation == null) {
-            throw new InitializationError(String.format("class '%s' must have a SuiteClasses annotation", klass.getName()));
+            return new Class[]{};
         }
         return annotation.value();
     }
@@ -73,15 +91,23 @@ public class DictoSuite extends ParentRunner<Runner> {
     private static String getSuiteID(Class<?> klass) throws InitializationError {
         SuiteID annotataion = klass.getAnnotation(SuiteID.class);
         if(annotataion == null) {
-            throw new InitializationError(String.format("class '%s' must have a SuiteID annotation", klass.getName()));
+            return MD5.hash(getProjectRoot(klass));
         }
         return annotataion.value();
     }
 
     private static String getProjectRoot(Class<?> klass) throws InitializationError {
-        SuiteID annotataion = klass.getAnnotation(SuiteID.class);
+        ProjectRoot annotataion = klass.getAnnotation(ProjectRoot.class);
         if(annotataion == null) {
             throw new InitializationError(String.format("class '%s' must have a ProjectRoot annotation", klass.getName()));
+        }
+        return annotataion.value();
+    }
+
+    private static String getServerAddress(Class<?> klass) throws InitializationError {
+        ServerAddress annotataion = klass.getAnnotation(ServerAddress.class);
+        if(annotataion == null) {
+            return "http://localhost:8010";
         }
         return annotataion.value();
     }
@@ -90,8 +116,19 @@ public class DictoSuite extends ParentRunner<Runner> {
 
     public DictoSuite(Class<?> klass, RunnerBuilder runner) throws InitializationError, IllegalAccessException, InstantiationException, InvocationTargetException {
         super(klass);
-        //this.runners = runner.runners(klass, getAnnotatedClasses(klass));
-        for(Class aKlass : getAnnotatedClasses(klass)) {
+        runDictoCode(klass);
+        ProjectDefinition.setSuiteId(getSuiteID(klass));
+        ProjectDefinition.setProjectRoot(getProjectRoot(klass));
+        ProjectDefinition.setServerAddress(getServerAddress(klass));
+
+        this.runners = runner.runners(klass, new Class[]{RulesParametrizedTest.class});
+    }
+
+    private void runDictoCode(Class<?> klass) throws InitializationError, IllegalAccessException, InstantiationException, InvocationTargetException {
+        ArrayList<Class> classes = new ArrayList<Class>();
+        classes.addAll(Arrays.asList(getAnnotatedClasses(klass)));
+        classes.add(klass);
+        for(Class aKlass : classes) {
             Object t = aKlass.newInstance();
             for (Method method : aKlass.getMethods()) {
                 if (method.isAnnotationPresent(DictoTest.class)) {
@@ -100,9 +137,6 @@ public class DictoSuite extends ParentRunner<Runner> {
                 }
             }
         }
-        ProjectDefinition.setSuiteId(getSuiteID(klass));
-        ProjectDefinition.setProjectRoot(getProjectRoot(klass));
-        this.runners = runner.runners(klass, new Class[]{RulesParametrizedTest.class});
     }
 
     @Override

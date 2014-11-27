@@ -14,16 +14,11 @@ class ExampleTest {
     'View := Package(name = "org.app.view")
     'Model := Package(name = "org.app.model")
     'Controller := Package(name = "org.app.controller")
-
-    'View must dependOn('Model)
+    'Tests := Klass(parentClass = "junit.framework.TestCase")
+    'Controller must dependOn('Model)
     'Model cannot dependOn('View and 'Controller)
-    only('Controller can access('Model))
-  }
-
-  @DictoTest
-  def testSecond = {
-    'SuperClass := Klass(name = "SuperClass")
-    'SubClass := Klass(name = "SubClass", parentClass = "SuperClass")
-    'SuperClass cannot (access('SubClass))
+    only('Tests can access('Model))
+    'Tests and 'Model canOnly access('Model)
+    'Controller must dependOn('View)
   }
 }

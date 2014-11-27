@@ -6,6 +6,7 @@ package ch.unibe.scg.dicto.test
 object ProjectDefinition {
   var suiteId :String = _
   var projectRoot :String = _
+  var serverAddress :String = _
 
   def setProjectRoot(_projectRoot: String) = {
     projectRoot = _projectRoot
@@ -13,5 +14,9 @@ object ProjectDefinition {
 
   def setSuiteId(_suiteId: String) = {
     suiteId = _suiteId
+  }
+
+  def setServerAddress(_serverAdress: String) = {
+    serverAddress = _serverAdress
   }
 }

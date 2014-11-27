@@ -9,10 +9,15 @@ import org.junit.runner.RunWith
 
 class ExampleTest2 {
 
+
   @DictoTest
-  def testThird = {
-    'XXX := Method(name = "aMethod")
-    'YYY := Klass(name = "AClass")
-    'XXX must (dependOn('YYY))
+  def testFourth = {
+    'Xxx := Package(name = "org.app.controller")
+    'Yyy := Package(name = "org.ap.model")
+    'Xxx must dependOn('Yyy)
+    'Yyy cannot dependOn('Yyy)
+    only('Xxx can access('Yyy))
+    only('Yyy can dependOn('Yyy))
+
   }
 }

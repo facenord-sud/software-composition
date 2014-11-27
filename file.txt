@@ -1,0 +1,1 @@
+"<results>\r\t<rules>\r\t\t<rule id=\"1\" failed=\"false\" value=\"Qwe must    depend on Rtz\">\n\t\t\t<subrule id=\"1001\" failed=\"false\" value=\"Qwe must dependOn(Rtz)\" testedBy=\"nil\">\n\t\t\t</subrule>\t\t</rule>\n\t</rules>\r</results>"

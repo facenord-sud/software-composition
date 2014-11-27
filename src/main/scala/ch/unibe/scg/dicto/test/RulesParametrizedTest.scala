@@ -34,18 +34,20 @@ class RulesParametrizedTest(subRule: Subrule) {
 
 object RulesParametrizedTest {
 
-  val host = "http://localhost:8010"
+  val host = ProjectDefinition.serverAddress
   val DICTO = "$DICTO"
 
   @Parameters
   def parameters: util.Collection[Array[Subrule]] = {
+    val list = new util.ArrayList[Array[Subrule]]()
     createSuiteIfNotExists
     createRules
     generateRule
-    val list = new util.ArrayList[Array[Subrule]]()
-    val file: String = this.getClass.getResource("/results.xml").getPath
-    val xml:Elem = XML.loadFile(file)
-    (xml \ "rules" \ "rule").foreach { rule =>
+    import java.nio.file.{Paths, Files}
+    import java.nio.charset.StandardCharsets
+    Files.write(Paths.get("/Users/leo/Desktop/results.txt"), getResults.getBytes(StandardCharsets.UTF_8))
+    val results: Elem = XML.loadString(getResults)
+    (results \ "rules" \ "rule").foreach { rule =>
       (rule \ "subrule").foreach { subruleElem =>
         list.add(Array(new Subrule(subruleElem)))
       }
@@ -77,8 +79,16 @@ object RulesParametrizedTest {
 
 
   def generateRule = {
-    val response = Unirest.post(s"$host/${ProjectDefinition.suiteId}/run").asJson()
-    println(response.getBody.toString)
+    Unirest.setTimeouts(2000000, 6000000)
+    Unirest.post(s"$host/${ProjectDefinition.suiteId}/run")
+      .header("accept", "application/json")
+      .header("Content-Type", "application/json; charset=UTF-8")
+      .asString()
+  }
+
+  def getResults :String = {
+    val response = Unirest.get(s"$host/${ProjectDefinition.suiteId}/resultsXML").asString()
+    response.getBody
   }
 
   def escape(raw: String): String = {
