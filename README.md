@@ -52,6 +52,20 @@ Once installed, start creating a test file like every other JUnit test. You can 
 After that, start coding dicto tests based on the DSL an run it like every JUnit tests! 
 
 ***NB:*** Do not forget to install and start the DICTO backend as explained [here](http://scg.unibe.ch/dicto/download.php)
+
+Writing the dicto DSL is quit similar than writing the DICTO language. Otherwise, some rules must be respected:
+1. For declaring varibles use 
+   ```scala
+    `VariableName := Type (attribute=value)
+   ```
+   Type can be Klass, Package or Method
+ 2. To write statements is quit similar as the Dicto language, but the variables must be put between parathesis. For example:
+  ```scala
+   `Controller must dependOn (`Model)
+  ```   
+ 3. A statement starting with `only` must be put between parenthesis like this: `only (...)`
+ 4. We recomand to use Vim with a bunch of plugins for the best autocompletions features (but need to spend time to configure it) IntelIjidea with scala plugin or the eclipse-scala IDE are fine as weel.
+ 
  
 ## Future work
 The next steps will to generate the DSL from the DICTO specifications
