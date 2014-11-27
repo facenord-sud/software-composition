@@ -1,7 +1,7 @@
 # Scala DSL for DICTŌ
 > A DSL for interacting with [DICTŌ](http://scg.unibe.ch/dicto/index.php)
 
-Version [v0.3](https://github.com/facenord-sud/software-composition/releases/tag/v0.3)
+Version [v0.4](https://github.com/facenord-sud/software-composition/releases/tag/v0.4)
 
 ## Goal
 The goal of this project is to build a Scala DSL which interact with DICTŌ and integrated with JUnit. A Scala DSL provide the advantage to can be used in every Scala and Java projects. So using DICTŌ will become really easy.
