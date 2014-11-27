@@ -23,6 +23,7 @@ integrated with JUnit 4.
 
 1. If not already done, install [sbt](http://www.scala-sbt.org) (`brew install sbt` on OS X)
 2. Clone this repo
+3. install and run the DICTO backend following these [instructions](http://scg.unibe.ch/dicto/download.php)
 3. From the root of this repo, run sbt: `sbt`
 4. To run the example test: `test`
 5. If you want to add more dicto tests:
@@ -49,6 +50,8 @@ You have two possibilities:
 Once installed, start creating a test file like every other JUnit test. You can inspire of this [one](https://github.com/facenord-sud/software-composition/blob/master/src/test/scala/DictoTester.scala) to get started.
 
 After that, start coding dicto tests based on the DSL an run it like every JUnit tests! 
+
+***NB:*** Do not forget to install and start the DICTO backend as explained [here](http://scg.unibe.ch/dicto/download.php)
  
 ## Future work
 The next steps will to generate the DSL from the DICTO specifications
