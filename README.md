@@ -20,12 +20,21 @@ demonstration only. It shows how the results from DICTŌ are used and
 integrated with JUnit 4. For now, it do not really interact with DICTŌ,
 but it use an example file located in: `src/main/resources`.
 
-## Usage
+## Getting started
 
 1. If not already done, install [sbt](http://www.scala-sbt.org) (`brew install sbt` on OS X)
 2. Clone this repo
 3. From the root of this repo, run sbt: `sbt`
 4. To run the example test: `test`
+5. If you want to add more dicto tests:
+6. edit the file src/test/scala/DictoTester.scala
+7. A dicto tests is something like that:
+```scala
+@DictoTest
+def aTest = {
+ // use the dicto DSL here:
+}
+```
  
 ## Future work
 The next steps will to generate the DSL from the DICTO specifications and to interact with the Small-talk engine.
