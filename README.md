@@ -40,7 +40,7 @@ def aTest = {
 
 You have two possibilities:
 - Downlaod the latest [release](https://github.com/facenord-sud/software-composition/releases) and include it in your path of your Java or Scala project
-- clone the repo:
+- clone the repo and:
   1. Run `sbt package`
   2. Run `sbt publish-locally`
   3. Include the project as a sbt, maven or ivy dependecie (browse where the lib is installed locally to know how to include it)
