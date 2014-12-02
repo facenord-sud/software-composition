@@ -8,4 +8,8 @@ class Subrule(elem: Node) {
   val id: String = (elem \ "@id").text
   val value: String = (elem \ "@value").text
   val isFailed: Boolean = failed == "true"
+
+  override def toString :String = {
+    value
+  }
 }

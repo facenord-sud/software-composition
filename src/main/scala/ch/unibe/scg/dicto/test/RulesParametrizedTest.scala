@@ -27,7 +27,7 @@ class RulesParametrizedTest(subRule: Subrule) {
 
   @Test
   def dictoTest() = {
-    val errorMessage = s"Subrule ${subRule.value} (id: ${subRule.id}) has failed:"  + subRule.error
+    val errorMessage = s"Subrule ${subRule.value} (id: ${subRule.id}) has failed:\n"  + subRule.error
     assertFalse(errorMessage, subRule.isFailed)
   }
 }
@@ -37,7 +37,7 @@ object RulesParametrizedTest {
   val host = ProjectDefinition.serverAddress
   val DICTO = "$DICTO"
 
-  @Parameters
+  @Parameters(name = "subrule {index}: {0}")
   def parameters: util.Collection[Array[Subrule]] = {
     val list = new util.ArrayList[Array[Subrule]]()
     createSuiteIfNotExists
