@@ -17,7 +17,7 @@ class Entity(val name:String) extends AbstractEntity{
     var result:List[String] = List[String]()
     for((name, value) <- parameters) {
       if(!Option(value).isEmpty) {
-        result = result :+ (name.name  + "=\"" + value + "\"")
+        result = result :+ (name.name  + ":\"" + value + "\"")
       }
     }
     if(result.length == 0) {
