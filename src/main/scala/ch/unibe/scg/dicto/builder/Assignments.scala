@@ -15,7 +15,7 @@ object Assignments {
   def text():String = {
     var result:List[String] = List[String]()
     for((key, value) <- variables) {
-      result = result :+ (key.text() + ":" + value.text())
+      result = result :+ (key.text() + "=" + value.text())
     }
     result.mkString("\n")
   }
